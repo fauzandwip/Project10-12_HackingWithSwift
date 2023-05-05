@@ -12,6 +12,8 @@ class ViewController: UITableViewController {
     var picker = UIImagePickerController()
     var photos = [Photo]()
 
+    var defaults = UserDefaults.standard
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -22,10 +24,34 @@ class ViewController: UITableViewController {
         
         pickerSetting()
         
+        loadData()
     }
     
     @objc func addPhoto() {
         present(picker, animated: true)
+    }
+    
+    func loadData() {
+        if let savedData = defaults.object(forKey: "photos") as? Data {
+            let jsonDecoder = JSONDecoder()
+            
+            do {
+                photos = try jsonDecoder.decode([Photo].self, from: savedData)
+            } catch {
+                print("Failed to load photos.")
+            }
+        }
+    }
+    
+    func saveData() {
+        let jsonEncoder = JSONEncoder()
+        
+        do {
+            let savedData = try jsonEncoder.encode(photos)
+            defaults.set(savedData, forKey: "photos")
+        } catch {
+            print("Failed to save photos.")
+        }
     }
     
 }
@@ -69,6 +95,7 @@ extension ViewController: UIImagePickerControllerDelegate, UINavigationControlle
             
             let photo = Photo(imageName: imageName, caption: caption)
             self?.photos.insert(photo, at: 0)
+            self?.saveData()
             
             let indexPath = IndexPath(row: 0, section: 0)
             self?.tableView.insertRows(at: [indexPath], with: .fade)
@@ -78,8 +105,7 @@ extension ViewController: UIImagePickerControllerDelegate, UINavigationControlle
     }
     
     func getDocumentsDirectory() -> URL {
-        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-        return paths[0]
+        return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
     }
 }
 
@@ -104,9 +130,11 @@ extension ViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let photo = photos[indexPath.row]
         
-        let vc = DetailViewController()
+        if let vc = storyboard?.instantiateViewController(withIdentifier: "Detail") as? DetailViewController {
             vc.selectedPhoto = photo
+            vc.path = getDocumentsDirectory().appending(path: photo.imageName)
             navigationController?.pushViewController(vc, animated: true)
+        }
         
     }
     

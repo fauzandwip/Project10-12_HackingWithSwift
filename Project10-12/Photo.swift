@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Photo {
+class Photo: NSObject, Codable {
     
     var imageName: String
     var caption: String

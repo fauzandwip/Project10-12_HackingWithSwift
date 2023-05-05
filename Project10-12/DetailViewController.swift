@@ -9,55 +9,32 @@ import UIKit
 
 class DetailViewController: UIViewController {
     
+    @IBOutlet weak var imageView: UIImageView!
+    
     var selectedPhoto: Photo?
+    var path: URL?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupUI()
+        title = selectedPhoto?.caption
+        navigationItem.largeTitleDisplayMode = .never
+        
+        if let url = path {
+            if let imageData = try? Data(contentsOf: url) {
+                let image = UIImage(data: imageData)
+                imageView.image = image
+            }
+        }
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        navigationController?.navigationBar.prefersLargeTitles = false
+        navigationController?.hidesBarsOnTap = true
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        navigationController?.navigationBar.prefersLargeTitles = true
-    }
-    
-    func setupUI() {
-        
-        title = selectedPhoto?.caption
-        
-        var image = UIImage()
-        let imagePath = getDocumentsDirectory().appending(path: selectedPhoto!.imageName)
-
-        let imageView = UIImageView(image: image)
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.contentMode = .scaleAspectFill
-        imageView.clipsToBounds = true
-        imageView.image = image
-        if let imageData = try? Data(contentsOf: imagePath) {
-            let image = UIImage(data: imageData)
-            imageView.image = image
-        }
-        view.addSubview(imageView)
-
-        view.restorationIdentifier = "Detail"
-
-        NSLayoutConstraint.activate([
-            imageView.topAnchor.constraint(equalTo: view.topAnchor),
-            imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            imageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            imageView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-        ])
-
-    }
-
-    func getDocumentsDirectory() -> URL {
-        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-        return paths[0]
+        navigationController?.hidesBarsOnTap = false
     }
     
 }
