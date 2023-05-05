@@ -20,6 +20,8 @@ class DetailViewController: UIViewController {
         title = selectedPhoto?.caption
         navigationItem.largeTitleDisplayMode = .never
         
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(shareTapped))
+        
         if let url = path {
             if let imageData = try? Data(contentsOf: url) {
                 let image = UIImage(data: imageData)
@@ -35,6 +37,18 @@ class DetailViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         navigationController?.hidesBarsOnTap = false
+    }
+    
+    @objc func shareTapped() {
+        guard let image = imageView.image?.jpegData(compressionQuality: 0.8) else {
+            fatalError("No image found")
+        }
+        
+        let text = selectedPhoto?.caption ?? ""
+        
+        let vc = UIActivityViewController(activityItems: [image, text], applicationActivities: [])
+        vc.popoverPresentationController?.barButtonItem = navigationItem.rightBarButtonItem
+        present(vc, animated: true)
     }
     
 }
