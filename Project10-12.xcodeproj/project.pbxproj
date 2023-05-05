@@ -14,6 +14,7 @@
 		7B0C492F2A04AF7D00D2FD38 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7B0C492E2A04AF7D00D2FD38 /* Assets.xcassets */; };
 		7B0C49322A04AF7D00D2FD38 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7B0C49302A04AF7D00D2FD38 /* LaunchScreen.storyboard */; };
 		7B0C493E2A04ED7B00D2FD38 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B0C493D2A04ED7B00D2FD38 /* Photo.swift */; };
+		7B0C49402A04F00C00D2FD38 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B0C493F2A04F00C00D2FD38 /* DetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		7B0C49312A04AF7D00D2FD38 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7B0C49332A04AF7D00D2FD38 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7B0C493D2A04ED7B00D2FD38 /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
+		7B0C493F2A04F00C00D2FD38 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +63,7 @@
 				7B0C49252A04AF7B00D2FD38 /* AppDelegate.swift */,
 				7B0C49272A04AF7B00D2FD38 /* SceneDelegate.swift */,
 				7B0C49292A04AF7B00D2FD38 /* ViewController.swift */,
+				7B0C493F2A04F00C00D2FD38 /* DetailViewController.swift */,
 				7B0C493D2A04ED7B00D2FD38 /* Photo.swift */,
 				7B0C492B2A04AF7B00D2FD38 /* Main.storyboard */,
 				7B0C492E2A04AF7D00D2FD38 /* Assets.xcassets */,
@@ -143,6 +146,7 @@
 			files = (
 				7B0C493E2A04ED7B00D2FD38 /* Photo.swift in Sources */,
 				7B0C492A2A04AF7B00D2FD38 /* ViewController.swift in Sources */,
+				7B0C49402A04F00C00D2FD38 /* DetailViewController.swift in Sources */,
 				7B0C49262A04AF7B00D2FD38 /* AppDelegate.swift in Sources */,
 				7B0C49282A04AF7B00D2FD38 /* SceneDelegate.swift in Sources */,
 			);
